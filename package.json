@@ -1,0 +1,10 @@
+{
+  "name": "kma-three-day-weather",
+  "version": "1.0.0",
+  "private": true,
+  "description": "기상청 단기예보로 3일 날씨를 보여주는 웹사이트",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  }
+}

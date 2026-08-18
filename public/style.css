@@ -1,0 +1,24 @@
+:root { font-family: Pretendard, "Noto Sans KR", system-ui, sans-serif; color: #17233d; background: #eef5ff; }
+* { box-sizing: border-box; }
+body { margin: 0; min-width: 320px; }
+.page-shell { max-width: 1050px; margin: 0 auto; padding: 74px 24px 38px; }
+.hero { text-align: center; margin-bottom: 32px; }
+.eyebrow { color: #4e78bd; font-size: .73rem; letter-spacing: .12em; font-weight: 700; margin: 0 0 10px; }
+h1 { margin: 0; font-size: clamp(2.4rem, 6vw, 4.3rem); letter-spacing: -.07em; }
+.intro { color: #56647d; margin: 15px auto 0; max-width: 510px; line-height: 1.7; }
+.search-card { display: grid; grid-template-columns: 1fr 1fr auto; gap: 14px; background: #fff; padding: 19px; border-radius: 18px; box-shadow: 0 13px 35px #477bc21a; }
+label { display: grid; gap: 7px; color: #51617c; font-size: .82rem; font-weight: 700; }
+select, input, button { border-radius: 10px; font: inherit; }
+select, input { padding: 12px 13px; border: 1px solid #d9e3f2; color: #17233d; background: #fbfdff; }
+button { align-self: end; border: 0; background: #2768c8; color: white; font-weight: 700; padding: 13px 22px; cursor: pointer; }
+button:hover { background: #1e57aa; } button:disabled { opacity: .65; cursor: wait; }
+.status { text-align: center; min-height: 25px; color: #64718a; margin: 28px 0 15px; font-size: .92rem; }
+.status.error { color: #bd3149; }
+.forecast { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.weather-card { background: #fff; border-radius: 18px; padding: 25px; text-align: center; box-shadow: 0 8px 24px #477bc112; }
+.weather-card .day-label { color: #5682c8; font-size: .85rem; font-weight: 800; margin: 0; }.weather-card h2 { margin: 7px 0 0; font-size: 1.3rem; }
+.weather-icon { font-size: 3.7rem; line-height: 1.25; margin: 13px 0 2px; }.weather-name { margin: 0; color: #53627b; font-weight: 700; }
+.temperature { margin: 17px 0; }.temperature strong { font-size: 2rem; letter-spacing: -.07em; }.temperature span { color: #70809b; font-size: .9rem; margin-left: 6px; }
+dl { display: grid; grid-template-columns: 1fr 1fr; margin: 0; border-top: 1px solid #e7eef8; padding-top: 16px; } dt { color: #8491a7; font-size: .76rem; } dd { margin: 5px 0 0; font-size: .9rem; font-weight: 700; }
+footer { color: #7b879a; text-align: center; font-size: .75rem; margin-top: 32px; }
+@media (max-width: 620px) { .page-shell { padding: 44px 16px 25px; }.search-card { grid-template-columns: 1fr; }.forecast { grid-template-columns: 1fr; }.weather-card { padding: 20px; } button { width: 100%; } }

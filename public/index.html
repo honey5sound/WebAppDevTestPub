@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>사흘 날씨 | 기상청 단기예보</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="page-shell">
+    <section class="hero">
+      <p class="eyebrow">KOREA METEOROLOGICAL ADMINISTRATION</p>
+      <h1>사흘 날씨</h1>
+      <p class="intro">원하는 지역과 날짜를 고르면, 그날부터 3일간의 기상청 단기예보를 한눈에 보여드려요.</p>
+    </section>
+    <section class="search-card" aria-label="날씨 검색">
+      <label>지역
+        <select id="region"></select>
+      </label>
+      <label>시작 날짜
+        <input id="date" type="date" />
+      </label>
+      <button id="search" type="button">날씨 확인</button>
+    </section>
+    <p id="status" class="status" aria-live="polite">지역과 날짜를 선택해 주세요.</p>
+    <section id="forecast" class="forecast" aria-live="polite"></section>
+    <footer>자료 제공: 기상청 단기예보 조회서비스 · 예보는 발표 시점에 따라 달라질 수 있습니다.</footer>
+  </main>
+  <template id="card-template"><article class="weather-card"><p class="day-label"></p><h2></h2><div class="weather-icon" aria-hidden="true"></div><p class="weather-name"></p><p class="temperature"><strong></strong><span></span></p><dl><div><dt>강수확률</dt><dd class="pop"></dd></div><div><dt>강수량</dt><dd class="pcp"></dd></div></dl></article></template>
+  <script src="app.js"></script>
+</body>
+</html>
