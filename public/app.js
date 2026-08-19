@@ -8,7 +8,7 @@ const status = document.querySelector('#status');
 const forecast = document.querySelector('#forecast');
 const template = document.querySelector('#card-template');
 const today = new Date();
-const localToday = toDateString(today);
+const localToday = toInputDate(today);
 dateInput.value = localToday;
 dateInput.min = localToday;
 regions.forEach(([name, nx, ny]) => regionSelect.add(new Option(name, `${nx},${ny}`)));
@@ -57,7 +57,8 @@ function render(items, start) {
 }
 function firstValue(items) { return items?.[0]?.fcstValue; }
 function weatherInfo(pty, sky) { if (pty === '1') return { icon: '🌧️', label: '비' }; if (pty === '2') return { icon: '🌨️', label: '비 또는 눈' }; if (pty === '3') return { icon: '❄️', label: '눈' }; if (pty === '4') return { icon: '🌦️', label: '소나기' }; return sky === '1' ? { icon: '☀️', label: '맑음' } : sky === '3' ? { icon: '🌤️', label: '구름 많음' } : { icon: '☁️', label: '흐림' }; }
-function addDays(dateString, days) { const date = new Date(`${dateString}T12:00:00`); date.setDate(date.getDate() + days); return toDateString(date); }
-function toDateString(date) { return `${date.getFullYear()}${String(date.getMonth() + 1).padStart(2, '0')}${String(date.getDate()).padStart(2, '0')}`; }
+function addDays(dateString, days) { const date = new Date(`${dateString}T12:00:00`); date.setDate(date.getDate() + days); return toForecastDate(date); }
+function toInputDate(date) { return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`; }
+function toForecastDate(date) { return `${date.getFullYear()}${String(date.getMonth() + 1).padStart(2, '0')}${String(date.getDate()).padStart(2, '0')}`; }
 function formatDate(date) { const d = new Date(`${date.slice(0, 4)}-${date.slice(4, 6)}-${date.slice(6)}T12:00:00`); return new Intl.DateTimeFormat('ko-KR', { month: 'long', day: 'numeric', weekday: 'short' }).format(d); }
 function setStatus(message, isError = false) { status.textContent = message; status.classList.toggle('error', isError); }
