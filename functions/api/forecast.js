@@ -20,8 +20,11 @@ const MID_REGIONS = {
 };
 
 export async function onRequestGet({ request, env }) {
-  if (!env.KMA_SERVICE_KEY) {
-    return json({ error: 'KMA_SERVICE_KEY is not configured. Check the Cloudflare Pages Secret.' }, 500);
+  const shortKey = env.KMA_SHORT_SERVICE_KEY || env.KMA_SERVICE_KEY;
+  const midLandKey = env.KMA_MID_LAND_SERVICE_KEY || env.KMA_SERVICE_KEY;
+  const midTaKey = env.KMA_MID_TA_SERVICE_KEY || env.KMA_SERVICE_KEY;
+  if (!shortKey || !midLandKey || !midTaKey) {
+    return json({ error: 'Configure the required KMA API Secrets in Cloudflare Pages.' }, 500);
   }
 
   const url = new URL(request.url);
@@ -34,15 +37,15 @@ export async function onRequestGet({ request, env }) {
 
   const shortBase = latestShortBaseTime();
   const midBaseTime = latestMidBaseTime();
-  const common = { pageNo: '1', numOfRows: '1000', dataType: 'JSON', authKey: env.KMA_SERVICE_KEY };
+  const common = { pageNo: '1', numOfRows: '1000', dataType: 'JSON' };
   const shortUrl = createUrl('https://apihub.kma.go.kr/api/typ02/openApi/VilageFcstInfoService_2.0/getVilageFcst', {
-    ...common, base_date: shortBase.baseDate, base_time: shortBase.baseTime, nx: String(nx), ny: String(ny),
+    ...common, authKey: shortKey, base_date: shortBase.baseDate, base_time: shortBase.baseTime, nx: String(nx), ny: String(ny),
   });
   const landUrl = createUrl('https://apihub.kma.go.kr/api/typ02/openApi/MidFcstInfoService/getMidLandFcst', {
-    ...common, regId: midRegion.land, tmFc: midBaseTime,
+    ...common, authKey: midLandKey, regId: midRegion.land, tmFc: midBaseTime,
   });
   const temperatureUrl = createUrl('https://apihub.kma.go.kr/api/typ02/openApi/MidFcstInfoService/getMidTa', {
-    ...common, regId: midRegion.temperature, tmFc: midBaseTime,
+    ...common, authKey: midTaKey, regId: midRegion.temperature, tmFc: midBaseTime,
   });
 
   try {
