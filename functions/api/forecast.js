@@ -69,7 +69,11 @@ async function fetchKma(url) {
   let data;
   try { data = await response.json(); } catch { throw new Error('The KMA API returned an invalid response.'); }
   const header = data?.response?.header;
-  if (!response.ok || header?.resultCode !== '00') throw new Error(header?.resultMsg || 'The KMA API request failed.');
+  if (!response.ok || header?.resultCode !== '00') {
+    const apiName = url.pathname.split('/').pop();
+    const reason = header?.resultMsg || `HTTP ${response.status}`;
+    throw new Error(`${apiName} failed (${header?.resultCode || response.status}): ${reason}`);
+  }
   const items = data?.response?.body?.items?.item;
   return Array.isArray(items) ? items : items ? [items] : [];
 }
